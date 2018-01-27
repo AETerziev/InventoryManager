@@ -19,25 +19,17 @@ namespace InventoryManager.Controllers
             this.dbContext = dbContext;
             this.userManager = userManager;
         }
-
         public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
-        public ActionResult About()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Add()
         {
             //this.dbContext.Roles.Add(new IdentityRole() { Name = "Admin" });
             //this.dbContext.SaveChangesAsync();
             ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }

@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity.Owin;
 using InventoryManager.Models;
 using Microsoft.AspNet.Identity;
 using InventoryManager.Data;
+using InventoryManager.Service.Contracts;
+using InventoryManager.Service;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(InventoryManager.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(InventoryManager.App_Start.NinjectWebCommon), "Stop")]
@@ -64,6 +66,8 @@ namespace InventoryManager.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IClothesService>().To<ClothesService>();
+
             kernel.Bind<ApplicationUserManager>()
               .ToMethod(_ => HttpContext
               .Current
