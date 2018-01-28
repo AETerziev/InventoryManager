@@ -5,7 +5,7 @@
 
 <h2>Add Clothes</h2>
 
-@using (Html.BeginForm("AddClothes", "Clothes", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddClothes", "Clothes", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>All fields are mandatory</h4>
@@ -44,7 +44,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Picture, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Picture, new { @class = "form-control" })
+            <input type="file" name="uploadFile"  />
         </div>
     </div>
     <div class="form-group">

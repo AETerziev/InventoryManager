@@ -2,6 +2,7 @@
 using InventoryManager.Service.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,7 +22,6 @@ namespace InventoryManager.Controllers
         [Authorize]
         public ActionResult AddClothes()
         {
-
             return this.View();
         }
 
@@ -29,9 +29,20 @@ namespace InventoryManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult AddClothes(RegisterClothesViewModel model)
+        public ActionResult AddClothes(RegisterClothesViewModel model, HttpPostedFileBase uploadFile)
         {
-            this.clothesService.AddClothes(model);
+            string directory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+
+            if (uploadFile != null && uploadFile.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(uploadFile.FileName);
+                var photoUrl = Path.Combine(directory, fileName);
+                model.Picture = photoUrl;
+                uploadFile.SaveAs(Path.Combine(directory, fileName));
+
+                this.clothesService.AddClothes(model);
+            }
+
 
             return RedirectToAction("Index", "Home");
         }
