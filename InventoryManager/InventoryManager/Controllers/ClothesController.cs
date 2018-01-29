@@ -37,7 +37,7 @@ namespace InventoryManager.Controllers
             {
                 var fileName = Path.GetFileName(uploadFile.FileName);
                 var photoUrl = Path.Combine(directory, fileName);
-                model.Picture = photoUrl;
+                model.PictureUrl = photoUrl;
                 uploadFile.SaveAs(Path.Combine(directory, fileName));
 
                 this.clothesService.AddClothes(model);

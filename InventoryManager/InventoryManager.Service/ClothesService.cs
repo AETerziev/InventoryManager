@@ -26,11 +26,18 @@ namespace InventoryManager.Service
                 Quantity = model.Quantity,
                 Size = model.Size,
                 SinglePrice = model.SinglePrice,
-                PictureUrl = model.Picture,
+                PictureUrl = model.PictureUrl,
                 Description = model.Description
             };
             this.dbContext.Clothes.Add(clothes);
             this.dbContext.SaveChanges();
+        }
+
+        public IEnumerable<RegisterClothesViewModel> GetAllClothes()
+        {
+            var query = this.dbContext.Clothes.AsQueryable();
+            var clothes = query.Select(RegisterClothesViewModel.Create).ToList();
+            return clothes;
         }
     }
 }

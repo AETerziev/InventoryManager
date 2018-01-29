@@ -1,4 +1,5 @@
-﻿using InventoryManager.Service.ViewModels;
+﻿using InventoryManager.Data.Models;
+using InventoryManager.Service.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace InventoryManager.Service.Contracts
     public interface IClothesService
     {
         void AddClothes(RegisterClothesViewModel model);
+
+        IEnumerable<RegisterClothesViewModel> GetAllClothes();
     }
 }

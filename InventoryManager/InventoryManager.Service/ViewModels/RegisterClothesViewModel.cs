@@ -33,24 +33,24 @@ namespace InventoryManager.Service.ViewModels
 
         [Required]
         [Display(Name = "Picture")]
-        public string Picture { get; set; }
+        public string PictureUrl { get; set; }
 
         [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        public static Expression<Func<RegisterClothesViewModel,Clothes>> Create
+        public static Expression<Func<Clothes, RegisterClothesViewModel>> Create
         {
             get
             {
-                return u => new Clothes()
+                return u => new RegisterClothesViewModel()
                 {
                     Name = u.Name,
                     Type = u.Type,
                     Quantity=u.Quantity,
                     Size=u.Size,
                     SinglePrice=u.SinglePrice,
-                    PictureUrl=u.Picture,
+                    PictureUrl=u.PictureUrl,
                     Description=u.Description
                 };
             }
