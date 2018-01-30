@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 namespace InventoryManager.Controllers
 {
     public class HomeController : Controller
@@ -25,6 +26,8 @@ namespace InventoryManager.Controllers
         public ActionResult Index()
         {
             var model = this.clothesService.GetAllClothes();
+            var json = JsonConvert.SerializeObject(model);
+            ViewBag.Response = json;
             return View(model);
         }
 

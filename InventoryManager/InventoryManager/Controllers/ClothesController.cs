@@ -31,19 +31,14 @@ namespace InventoryManager.Controllers
         [Authorize]
         public ActionResult AddClothes(RegisterClothesViewModel model, HttpPostedFileBase uploadFile)
         {
-            string directory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
-
             if (uploadFile != null && uploadFile.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(uploadFile.FileName);
-                var photoUrl = Path.Combine(directory, fileName);
+                string photoUrl = System.DateTime.Now.ToString("ddMMyyhhmmss_") + fileName;
                 model.PictureUrl = photoUrl;
-                uploadFile.SaveAs(Path.Combine(directory, fileName));
-
+                uploadFile.SaveAs(Server.MapPath(photoUrl));
                 this.clothesService.AddClothes(model);
             }
-
-
             return RedirectToAction("Index", "Home");
         }
     }
