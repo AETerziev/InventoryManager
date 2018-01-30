@@ -12,6 +12,11 @@ namespace InventoryManager.Service.ViewModels
    public class RegisterClothesViewModel
     {
         [Required]
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+
+        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
@@ -45,6 +50,7 @@ namespace InventoryManager.Service.ViewModels
             {
                 return u => new RegisterClothesViewModel()
                 {
+                    Id=u.Id,
                     Name = u.Name,
                     Type = u.Type,
                     Quantity=u.Quantity,

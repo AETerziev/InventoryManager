@@ -3,6 +3,8 @@
     ViewBag.Title = "Home Page";
 }
 
+
+ @*The table needs just a little bit more configurations with the row data and actionlinks need to be added for editing each row*@
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,24 +29,7 @@
                     <td>@m.Type</td>
                     <td>@m.Quantity</td>
                     <td>@m.SinglePrice</td>
-                </tr>
-                @*<tr>
-                    <td colspan="5">
-                        <table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">
-                            <tr>
-                                <td>Size:</td>
-                                <td>  d.Price </td>
-                            </tr>
-                            <tr>
-                                <td>Description:</td>
-                                <td> @m.Description </td>
-                            </tr>
-                            <tr>
-                                <td>Image:</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>*@
+                </tr>            
             }
         </tbody>
         <tfoot>
@@ -95,21 +80,18 @@
 
             });
 
-            // Add event listener for opening and closing details
             $('#example tbody').on('click', 'td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var tdi = tr.find("i.fa");
                 var row = table.row(tr);
 
                 if (row.child.isShown()) {
-                    // This row is already open - close it
                     row.child.hide();
                     tr.removeClass('shown');
                     tdi.first().removeClass('fa-minus-square');
                     tdi.first().addClass('fa-plus-square');
                 }
                 else {
-                    // Open this row
                     row.child(format(row.data())).show();
                     tr.addClass('shown');
                     tdi.first().removeClass('fa-plus-square');
@@ -125,16 +107,14 @@
         });
 
         function format(d) {
-
-            // `d` is the original data object for the row
             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
                 '<tr>' +
                 '<td>Size:</td>' +
-                '<td>' + d.Name + '</td>' +
+                '<td>' + d.Size + '</td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td>Description:</td>' +
-                '<td>' + d.Name + '</td>' +
+                '<td>' + d.Description + '</td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td>Image:</td>' +
